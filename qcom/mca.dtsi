@@ -115,9 +115,6 @@
 
 	mca_strategy_buckchg_class: mca_strategy_buckchg_class {
 		compatible = "mca,strategy_buckchg";
-		allow_start_ffc_batt_soc_thr = <95>;
-		sw_cv_fcc_step = <50>;
-		sw_cv_fv_step = <5>;
 		support_multi_buck = <0>;
 		in_dcp = <1500>;
 		in_pd = <1600>;
@@ -141,6 +138,7 @@
 		pmic_fv_compensation = <0>;
 		pmic_wls_fv_compensation = <0>;
 		pmic_iterm_compensation = <30>;
+		allow_start_ffc_batt_soc_thr = <95>;
 
 		/* 0: No CP, 1: OVP before CP, 2: OVP before PMIC */
 		vusb_ovp_location = <1>;
@@ -149,6 +147,8 @@
 		rev_req_vadp = <9000 9000>;
 		rev_vadp_valid_h = <9200 9200>;
 		rev_vadp_valid_l = <8400 8400>;
+		sw_cv_fcc_step = <50>;
+		sw_cv_fv_step = <5>;
 
 		status = "disabled";
 	};
@@ -156,8 +156,6 @@
 
 	mca_strategy_quick_charge: mca_strategy_quick_charge {
 		compatible = "mca,quick_charger";
-		mult_to_single_count = <0>;
-		support_ichg_cutoff_priority = <1>;
 		status = "disabled";
 		batt_type = <0>;
 		cp_type = <0>;
@@ -196,6 +194,8 @@
 		qc3p5_taper_vol_hys = <20>;
 		pps_taper_vol_hys = <5>;
 		quick_chg_fv_hys = <1>;
+		support_ichg_cutoff_priority = <1>;
+		mult_to_single_count = <0>;
 
 		support_cp_vfc = <0>;
 		vfc_iout_fsw_map =
@@ -283,8 +283,8 @@
 	mca_strategy_basic_wireless_class: mca_strategy_basic_wireless_class {
 		compatible = "mca,basic_wireless";
 		support_q_value = <0>;
-		support_q_tx = <1 1 0>;
 		support_multi_buck = <0>;
+		support_q_tx = <1 1 0>;
 		//low_inductance_tx_50W, low_inductance_tx_80W
 		tx_q1 = /bits/ 8 <0x15 0x15>;
 		tx_q2 = <27 27>;
@@ -472,7 +472,6 @@
 
 	mca_strategy_quick_wireless_class: mca_strategy_quick_wireless_class {
 		compatible = "mca,quick_wireless";
-		sw_cv_taper_reduce_cv = <0>;
 		status = "disabled";
 		batt_type = <0>;
 		cp_type = <0>;
@@ -490,6 +489,7 @@
 		support_mode = <4>;
 		max_rx_vout_request = <19500>;
 		support-cp-num-switch = <0>;
+		sw_cv_taper_reduce_cv = <0>;
 		batt_para =
 			"0", "lwn", "temp_para1",
 			"0", "atl", "temp_para1";
@@ -652,6 +652,34 @@
 		status = "disabled";
 		enable_fv_dec_by_cc = <0>;
 		support_csd = <0>;
+		smart_bypass_support = <0>;
+		smart_bypass_entry_soc = <5>;
+		smart_bypass_exit_soc = <90>;
+		/* temp_low, temp_high, low_temp_hys, high_temp_hys, fcc */
+		smart_bypass_high_lmt_cfg = <
+			(-100) 150 5 5 3000
+			151 200 5 5 2500
+			201 250 5 5 2000
+			251 300 5 5 1500
+			301 370 5 5 1000
+			371 800 5 5 650
+		>;
+		smart_bypass_med_lmt_cfg = <
+			(-100) 150 5 5 17600
+			151 200 5 5 17600
+			201 250 5 5 17600
+			251 300 5 5 8000
+			301 370 5 5 5000
+			371 800 5 5 2000
+		>;
+		smart_bypass_low_lmt_cfg = <
+			(-100) 150 5 5 17600
+			151 200 5 5 17600
+			201 250 5 5 17600
+			251 300 5 5 17600
+			301 370 5 5 17600
+			371 800 5 5 17600
+		>;
 	};
 
 	soc_limit: soc_limit {
@@ -1646,7 +1674,7 @@ mca_sc96281_fod_data: mca_sc96281_fod_data {
 	mca_ibat_ocp_mon: mca_ibat_ocp_mon {
 		compatible = "mca,ibat_ocp_monitor";
 		fg_type = <1>;
-		ocp_threshold = <0x8d9a00 0x360420>;
 		status = "disabled";
+		ocp_threshold = <0x8d9a00 0x360420>;
 	};
 };
