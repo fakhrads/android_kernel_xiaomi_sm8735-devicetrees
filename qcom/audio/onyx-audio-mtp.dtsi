@@ -286,7 +286,7 @@
             qcom,wf-vmax-mv = <3600>;
         };
     };
-    fsa4480: fsa4480@42 {
+    onyx_fsa4480: fsa4480@42 {
         compatible = "qcom,fsa4480-i2c";
         reg = <0x42>;
         status = "ok";
@@ -322,7 +322,7 @@
     qcom,msm-mbhc-gnd-swh = <0>;
     qcom,wsa-max-devs = <0>;
     swr-haptics-unsupported;
-    fsa4480-i2c-handle = <&fsa4480>;
+    fsa4480-i2c-handle = <&onyx_fsa4480>;
     qcom,audio-routing =
         "AMIC1", "Analog Mic1",
         "AMIC1", "MIC BIAS1",
