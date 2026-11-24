@@ -2,18 +2,18 @@
 #include "tuna-mtp.dtsi"
 
 &soc {
-	mtdoops_pmsg@0xa3500000 {
+	mtdoops_pmsg@0xa3700000 {
 		compatible = "xiaomi,mtdoops_pmsg";
-		reg = <0xa3500000 0x400000>;
-		console-size = <0x200000>;
-		pmsg-size = <0x200000>;
+		reg = <0xa3700000 0x100000>;
+		console-size = <0x80000>;
+		pmsg-size = <0x80000>;
 	};
 
-	bootmonitor_pmsg@0xa3500000 {
+	bootmonitor_pmsg@0xa3800000 {
 		compatible = "xiaomi,bootmonitor_pmsg";
-		reg = <0xa3500000 0x400000>;
-		console-size = <0x200000>;
-		pmsg-size = <0x200000>;
+		reg = <0xa3800000 0x100000>;
+		console-size = <0x80000>;
+		pmsg-size = <0x80000>;
 	};
 
 	gpio_key {
