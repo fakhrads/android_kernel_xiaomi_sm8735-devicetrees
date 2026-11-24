@@ -2084,3 +2084,24 @@
 
 };
 /*End Remove pm8010_m  pmic*/
+
+/* Disable unpopulated PMD802x display sub-PMIC */
+&spmi_bus {
+	pmd802x@4 {
+		status = "disabled";
+	};
+
+	qcom,pmd802x@4 {
+		status = "disabled";
+	};
+};
+
+&spmi0_debug_bus {
+	pmd802x@4 {
+		status = "disabled";
+	};
+};
+
+&thermal_zones {
+	/delete-node/ pmd802x_tz;
+};
